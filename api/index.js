@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';  // because this is backend need to add .js;
 import authRoutes from './routes/auth.route.js'
+//import cors from 'cors';
 dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(() => {
@@ -16,6 +17,18 @@ const app = express();
 
 // have to allow our app to use json - from Insomnia for testing
 app.use(express.json());
+
+// cors middleware
+/* 
+const corsOptions = { 
+    // origin:'https://abc.onrender.com',
+    AccessControlAllowOrigin: '*',  
+    origin: '*',  
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE' 
+};
+app.use(cors(corsOptions));
+ */
+//app.use(cors({ credentials: true }));
 
 app.listen(3000, () => {
     console.log('Server listening on port 3000');
