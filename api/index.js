@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';  // because this is backend need to add .js;
 import authRoutes from './routes/auth.route.js'
+import cookieParser from 'cookie-parser';
 //import cors from 'cors';
 dotenv.config();
 
@@ -17,6 +18,8 @@ const app = express();
 
 // have to allow our app to use json - from Insomnia for testing
 app.use(express.json());
+
+app.use(cookieParser());
 
 // cors middleware
 /* 
