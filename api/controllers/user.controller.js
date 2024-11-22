@@ -32,9 +32,11 @@ export  const updateUser = async(req, res, next) => {
             },
             { new: true }
         );
+        console.log("ran update user - returned");
         const { password, ...rest } = updatedUser._doc;
         res.status(200).json(rest);  // do not send the password back
     } catch(error) {
+        console.log("Error in update user caught");
         next(error);
-    }
+    } 
 };

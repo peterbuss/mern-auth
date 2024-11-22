@@ -2,6 +2,7 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { signInSuccess } from "../redux/user/userSlice";
+import { useNavigate } from 'react-router-dom';
 
 export default function OAuth() {
 
@@ -9,6 +10,7 @@ export default function OAuth() {
     const dispatch = useDispatch();  // give an invalid hook error in browser console
     // cannot call hook inside of an event handler
     // and must be called withing a function component
+    const navigate = useNavigate();
 
     console.log("In OA");
     const handleGoogleClick = async () => {
@@ -34,7 +36,7 @@ export default function OAuth() {
             console.log("result.user", result.user);
             console.log("OAuth data", data);
             dispatch(signInSuccess(data));
-            
+            navigate('/');
         } catch(error) {
             console.log('could log in with google', error);         
         }
