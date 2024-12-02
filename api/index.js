@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';  // because this is backend need to add .js;
 import authRoutes from './routes/auth.route.js'
 import cookieParser from 'cookie-parser';
+import path from 'path';
 //import cors from 'cors';
+
 dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(() => {
@@ -14,7 +16,15 @@ mongoose.connect(process.env.MONGO).then(() => {
     console.log(err);
 });
 
+const __dirname = path.resolve();  // will find dynamic dir name
+
 const app = express();
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname,  'client', 'dist', 'index.html'));
+});
 
 // have to allow our app to use json - from Insomnia for testing
 app.use(express.json());
